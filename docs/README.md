@@ -1,27 +1,28 @@
 # aircv
 Python Lib based on python-opencv2 *for python2.7+*
 
-## Usage
+## Initialization
 
     import aircv as ac
-    imsrc = ac.imread('youimage.png') # 原始图像
-    imsch = ac.imread('searched.png') # 带查找的部分
+    imsrc = ac.imread('youimage.png') # croped image
+    imsch = ac.imread('searched.png') # searched.png contains youimage.png 
 
-#### SIFT查找图像
+#### search image through SIFT
 
     print ac.find_sift(imsrc, imsch)
 
-期望如下输出, 查找失败就是[]
+    Return value:
+        if failure , return  []
+        
+        if find out the croped imapge ,return the croped image's location just like flowing:
+        ((215, 45), [(160, 24), (161, 66), (270, 66), (269, 24)])  --- four location of rectangle image
 
-中点坐标， 目标图像周围四个点的坐标
-
-    ((215, 45), [(160, 24), (161, 66), (270, 66), (269, 24)])
-
-#### SIFT多个相同的部分查找
+#### if searched image contains mutiple croped image
 
     print ac.find_all_sift(imsrc, imsch, maxcnt = 0)
 
-maxcnt是可选参数，限制最多匹配的数量。输出eg， 一个都找不到返回None
+    maxcnt是可选参数，限制最多匹配的数量。输出eg， 一个都找不到返回None
+    maxcnt is optional parameter that restrict max matched number, return 'None' 
 
     [((215, 45), [(160, 24), (161, 66), (270, 66), (269, 24)])]
 
